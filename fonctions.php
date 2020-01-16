@@ -319,3 +319,7 @@ function pagination_salle(){
         echo "<a href=\"http://localhost/W@C/Projet/my_cinema/recherche_salle.php?page=$i\"> $i </a> \ ";
     }
 }
+
+function alert($message) {
+    echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';
+}

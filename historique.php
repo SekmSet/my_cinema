@@ -8,7 +8,11 @@
 
     if (!empty($add_movie)) {
         $film = get_film_by_name($add_movie);
-        add_movie_history($return_member['id_membre'],$film['id_film']);
+        if ($film) { // si un film est trouvé
+            add_movie_history($return_member['id_membre'], $film['id_film']);
+        } else {
+            alert('Pas de film trouvé');
+        }
     }
 
     $return_historique = historic_member($id_perso);

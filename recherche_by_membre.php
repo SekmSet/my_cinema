@@ -2,34 +2,39 @@
     require ("header.php");
 
     $page = $_GET['page'] ?? 1 ;
+    $membre_nom = $_GET['recherche_par_nom']??null;
+    $membre_prenom = $_GET['recherche_par_prenom']??null;
+    $membre_ville = $_GET['recherche_par_ville']??null;
+    $membre_cp = $_GET['recherche_par_cp']??null;
 
-    $return_membre = get_membre($page);
+    $return_membre = get_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp);
+
     $return_pagination = pagination_membre();
 
 ?>
 
 <div class="container col-md-12">
-    <form class="form col-md-6">
+    <form class="form col-md-6" method="get">
         <div class="col-md-6">
             <label for="recherche">
                 Recherche par prénom
             </label>
-            <input type="text" name="recherche" id="recherche" placeholder="armand" required>
+            <input type="text" name="recherche_par_prenom" id="recherche" placeholder="armand">
 
             <label for="recherche">
                 Recherche par nom
             </label>
-            <input type="text" name="recherche" id="recherche" placeholder="de-ferrieres-de-sauveboeuf" required>
+            <input type="text" name="recherche_par_nom" id="recherche" placeholder="de-ferrieres-de-sauveboeuf">
 
             <label for="recherche">
                 Recherche par ville
             </label>
-            <input type="text" name="recherche" id="recherche" placeholder="Lyon" required>
+            <input type="text" name="recherche_par_ville" id="recherche" placeholder="Lyon">
 
             <label for="recherche">
                 Recherche par code postale
             </label>
-            <input type="number" name="recherche" id="recherche" placeholder="69003" required>
+            <input type="text" name="recherche_par_cp" id="recherche" placeholder="69003">
         </div>
 
         <div class="col-md-6">
@@ -46,12 +51,19 @@
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <?= $value['nom'] ." ".$value['prenom'] ;?>
+                            <?= "Nom : ".$value['nom'] ;?>
+                            <br>
+                            <?= "Prénom : ".$value['prenom'] ;?>
 
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
                         <p class="card-text"> <?= "Ville : ".$value['ville'];?> </p>
                         <p class="card-text"> <?= "Code postale : ".$value['cpostal'];?> </p>
+                        <br>
+                        <p class = "text-hidden">
+                            <a href="historique.php?id_perso=<?= $value['id_perso'];?>"> Voir l'historique </a>
+                        </p>
+
                     </div>
                 </div>
             </div>

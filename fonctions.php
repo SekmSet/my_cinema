@@ -1,6 +1,40 @@
 <?php
+/** GESTION DES HISTORIQUES **/
 
-/** FONCTIONS POUR LES AFFICHAGES **/
+function historic_member($id_perso){
+    if($id_perso === null || !is_numeric($id_perso)){
+        return [];
+    }
+
+    $recup_var = connect_sql();
+    $show_histo = "select *  from membre
+        left join historique_membre
+            on membre.id_membre = historique_membre.id_membre
+        left join film  on historique_membre.id_film = film.id_film
+        where membre.id_fiche_perso = $id_perso;";
+
+    $results_histo = $recup_var->query($show_histo, PDO::FETCH_ASSOC);
+
+    return $results_histo->fetchAll();
+}
+
+function get_member_by_id_perso($id_perso){
+    if($id_perso === null || !is_numeric($id_perso)){
+        return [];
+    }
+
+    $recup_var = connect_sql();
+    $show_name = "select *  from membre
+        left join fiche_personne
+            on membre.id_fiche_perso = fiche_personne.id_perso
+        where membre.id_fiche_perso = $id_perso;";
+
+    $results_name = $recup_var->query($show_name, PDO::FETCH_ASSOC);
+
+    return $results_name->fetch();
+}
+
+/** FONCTIONS POUR LES AFFICHAGES & LES FILTRAGES **/
 
 function get_reduction(){
 
@@ -22,49 +56,79 @@ function get_abonnement(){
     return $results_abonnement->fetchAll() ;
 }
 
-function get_membre($page){
+function get_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp){
 
     $recup_var = connect_sql();
 
-    $start = ($page-1)*12;
+    $membre_par_page = 12;
+    $start = ($page-1)*$membre_par_page;
 
-    $show_membre = "select * from fiche_personne limit $start ,12;";
+    $where = [];
 
+    if(!empty($membre_prenom)){
+        $where[] = "prenom = '$membre_prenom'";
+    }
+    if(!empty($membre_nom)){
+        $where[] = "nom like '$membre_nom%'";
+    }
+    if(!empty($membre_ville)){ // tu avais mi isset (c'etait toujorus set car si null c'est quand meme set
+        $where[] = "ville like '$membre_ville%'";
+    }
+    if(!empty($membre_cp)){
+        $where[] = "cpostal = '$membre_cp'"; // quand = pas de % icic 2eme errzeur que tu avais pas tres grave ok like vs =
+    }
+
+    $where_to_string = implode(' and ',$where);
+
+    if(!empty($where_to_string)){
+        $show_membre = "select nom,prenom,cpostal,ville,id_perso
+                            from fiche_personne 
+                            where 
+                                $where_to_string
+                            limit $start ,$membre_par_page;";
+    } else {
+        $show_membre = "select nom,prenom,cpostal,ville,id_perso
+                            from fiche_personne 
+                            limit $start ,$membre_par_page;";
+    }
     $results_membre = $recup_var->query($show_membre, PDO::FETCH_ASSOC);
+
     return $results_membre->fetchAll();
 }
 
-function get_film($page,$recherche_titre,$genre_selected,$distrib_select,$annee_affiche_deb_select,$annee_affiche_fin_select,$annee_prod_select){
+function get_films($page, $recherche_titre, $genre_selected, $distrib_select, $annee_affiche_deb_select, $annee_affiche_fin_select, $annee_prod_select){
 
     $recup_var = connect_sql();
+
     $film_par_page = 16;
     $start = ($page-1) * $film_par_page;
 
     $where = [];
-    if($recherche_titre !== null) {
+    if(!empty($recherche_titre)) {
         $where[] = "titre like '$recherche_titre%'";
     }
-    if($annee_affiche_deb_select !== 'Select année début affichage') {
+    if(!empty($annee_affiche_deb_select)) {
         $where[] =  "year(date_debut_affiche) = '$annee_affiche_deb_select'";
     }
-    if($annee_affiche_fin_select !== 'Select année fin affichage') {
+    if(!empty($annee_affiche_fin_select)) {
         $where[] =  "year(date_fin_affiche) = '$annee_affiche_fin_select'";
     }
-    if($annee_prod_select !== 'Select année de production') {
+    if(!empty($annee_prod_select)) {
         $where[] = "annee_prod = '$annee_prod_select'";
     }
 
-    if($distrib_select !== 'Select distributeur'){
+    if(!empty($distrib_select)){
         $where[] = "distrib.nom = '$distrib_select'";
     }
 
-    if($genre_selected !== 'Select genre'){
+    if(!empty($genre_selected)){
         $where[] = "genre.nom = '$genre_selected'";
     }
 
     $where_string = implode(' and ', $where); //  titre like '$recherche_titre%' and year(date_fin_affiche) = '$annee_affiche_fin_select'
 
-    $show_film = "select titre,resum,duree_min, genre.nom as 'nom_genre', distrib.nom as 'nom_distrib'
+    if(!empty($where_string)) {
+        $show_film = "select titre,resum,duree_min, genre.nom as 'nom_genre', distrib.nom as 'nom_distrib'
                         from film
                         left join genre on film.id_genre = genre.id_genre
                         left join distrib on film.id_distrib = distrib.id_distrib
@@ -72,8 +136,37 @@ function get_film($page,$recherche_titre,$genre_selected,$distrib_select,$annee_
                               $where_string
                         limit $start,$film_par_page;";
 
+    } else {
+        $show_film = "select titre,resum,duree_min, genre.nom as 'nom_genre', distrib.nom as 'nom_distrib'
+                        from film
+                        left join genre on film.id_genre = genre.id_genre
+                        left join distrib on film.id_distrib = distrib.id_distrib
+                        limit $start,$film_par_page;";
+    }
+
     $results_film = $recup_var->query($show_film, PDO::FETCH_ASSOC);
+
     return $results_film->fetchAll();
+}
+
+function get_film_by_name($name) {
+    $recup_var = connect_sql();
+
+    $show_titre_film = "select * from film where titre = '$name';";
+    $film = $recup_var->query($show_titre_film, PDO::FETCH_ASSOC);
+    return $film->fetch();
+}
+
+function add_movie_history($id_membre, $id_film){
+    $recup_var = connect_sql();
+
+    $date = 'NOW()';
+
+    if(!empty($id_membre) && !empty($id_film) && is_numeric($id_membre) && is_numeric($id_film)){
+
+        $show_add = "insert into historique_membre values ($id_membre,$id_film,$date);";
+        $recup_var->exec($show_add);
+    }
 }
 
 function print_selected($var_url,$var_opt){
@@ -83,19 +176,38 @@ function print_selected($var_url,$var_opt){
     }
 }
 
-function get_salle($page){
+function get_salle($page,$nom_salle,$num_etage,$nbr_siege){
 
     $recup_var = connect_sql();
 
     $salle_par_page = 6;
     $start = ($page-1)*$salle_par_page;
 
-    $show_salle = "select * from salle limit $start,$salle_par_page;";
+    $where = [];
+    if(!empty($nom_salle)){
+        $where[] = "nom_salle like '$nom_salle%'";
+    }
+    if($num_etage !== 'Select numéro étage'){
+        $where[] = "etage_salle = '$num_etage'";
+    }
+    if($nbr_siege !== 'Select nombre siège'){
+        $where[] = "nbr_siege = '$nbr_siege'";
+    }
+
+    $where_to_string = implode(' and ',$where);
+
+    if(!empty($where_to_string)){
+        $show_salle = "select nom_salle,numero_salle,etage_salle,nbr_siege from salle
+                            where
+                                  $where_to_string
+                            limit $start,$salle_par_page;";
+    } else {
+        $show_salle = "select nom_salle,numero_salle,etage_salle,nbr_siege from salle
+                            limit $start,$salle_par_page;";
+    }
 
     $results_salle = $recup_var->query($show_salle, PDO::FETCH_ASSOC);
-
     return $results_salle->fetchAll();
-
 }
 
 /** FONCTIONS POUR LES LISTES DE SELECTION **/
@@ -140,6 +252,20 @@ function select_film_annee_prod(){
     $select_annee_prod = 'select annee_prod from film group by annee_prod;';
     $results_prod = $recup_var->query($select_annee_prod, PDO::FETCH_ASSOC);
     return $results_prod->fetchAll();
+}
+
+function select_etage(){
+    $recup_var = connect_sql();
+    $num_etage = 'select etage_salle from salle group by etage_salle;';
+    $results_etage = $recup_var->query($num_etage, PDO::FETCH_ASSOC);
+    return $results_etage->fetchAll();
+}
+
+function select_siege(){
+    $recup_var = connect_sql();
+    $nbr_siege = 'select nbr_siege from salle group by nbr_siege;';
+    $results_siege = $recup_var->query($nbr_siege, PDO::FETCH_ASSOC);
+    return $results_siege->fetchAll();
 }
 
 /** FONCTIONS POUR LA PAGINATION **/

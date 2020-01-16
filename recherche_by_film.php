@@ -4,13 +4,13 @@
     $page = $_GET['page'] ?? 1;
 
     $recherche_titre = $_GET['recherche']??null;
-    $genre_selected = $_GET['gender_type']??null ;
-    $distrib_select = $_GET['name_distrib']??null ;
-    $annee_affiche_deb_select = $_GET['deb_affiche']??null ;
-    $annee_affiche_fin_select = $_GET['fin_affiche']??null ;
-    $annee_prod_select = $_GET['year_prod']??null ;
+    $genre_selected = $_GET['gender_type']??null;
+    $distrib_select = $_GET['name_distrib']??null;
+    $annee_affiche_deb_select = $_GET['deb_affiche']??null;
+    $annee_affiche_fin_select = $_GET['fin_affiche']??null;
+    $annee_prod_select = $_GET['year_prod']??null;
 
-    $return_films = get_film($page,$recherche_titre,$genre_selected,$distrib_select,$annee_affiche_deb_select,
+    $return_films = get_films($page,$recherche_titre,$genre_selected,$distrib_select,$annee_affiche_deb_select,
                                 $annee_affiche_fin_select,$annee_prod_select);
 
     $return_select_genre = select_genre();
@@ -20,6 +20,7 @@
     $return_select_annee_prod =  select_film_annee_prod();
 
     $return_pagination = pagination_film();
+
 ?>
 
 <div class="container col-md-12">
@@ -34,7 +35,7 @@
         <div class="form-group">
             <label for="select_gender">Genre</label>
             <select name="gender_type" class="form-control" id="select_gender">
-                <option>Select genre</option>
+                <option value="">Select genre</option>
                 <?php foreach ($return_select_genre as $value){ ?>
                     <option <?= print_selected($genre_selected,$value['nom']);?> ><?= $value['nom'];?></option>
                 <?php } ?>
@@ -44,7 +45,7 @@
         <div class="form-group">
             <label for="select_distrib">Distributeur</label>
             <select name="name_distrib" class="form-control" id="select_distrib">
-                <option>Select distributeur</option>
+                <option value="">Select distributeur</option>
                 <?php foreach ($return_select_distrib as $value){ ?>
                     <option <?= print_selected($distrib_select,$value['nom']);?>><?= $value['nom'];?></option>
                 <?php } ?>
@@ -56,7 +57,7 @@
         <div class="form-group">
             <label for="year_first_affiche">Année début d'affichage</label>
             <select name="deb_affiche" class="form-control" id="year_first_affiche">
-                <option>Select année début affichage</option>
+                <option value="">Select année début affichage</option>
                 <?php foreach ($return_select_debut_affiche as $value){ ?>
                     <option <?= print_selected($annee_affiche_deb_select,$value['year(date_debut_affiche)']);?>> <?= $value['year(date_debut_affiche)'];?> </option>
                 <?php } ?>
@@ -68,7 +69,7 @@
         <div class="form-group">
             <label for="year_last_affiche">Année fin d'affichage</label>
             <select name="fin_affiche" class="form-control" id="year_last_affiche">
-                <option>Select année fin affichage</option>
+                <option value="">Select année fin affichage</option>
                 <?php foreach ($return_select_fin_affiche as $value){ ?>
                     <option <?= print_selected($annee_affiche_fin_select,$value['year(date_fin_affiche)']);?>><?= $value['year(date_fin_affiche)'];?></option>
                 <?php } ?>
@@ -80,7 +81,7 @@
         <div class="form-group">
             <label for="year_annee_prod">Année de production</label>
             <select name="year_prod" class="form-control" id="year_annee_prod">
-                <option>Select année de production</option>
+                <option value="">Select année de production</option>
                 <?php foreach ($return_select_annee_prod as $value){ ?>
                     <option <?= print_selected($annee_prod_select,$value['annee_prod']);?>><?= $value['annee_prod'];?></option>
                 <?php } ?>
@@ -110,7 +111,6 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Avis</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter à mon historique</button>
                             <br>
 
                             genre <?= $value['nom_genre']; ?><br>

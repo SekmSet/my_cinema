@@ -26,13 +26,6 @@
                     Une salle
                 </a>
             </li>
-
-            <li>
-                <a href="historique.php">
-                    Historique
-                </a>
-            </li>
-
         </ul>
     </div>
 </div>

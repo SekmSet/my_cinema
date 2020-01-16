@@ -81,12 +81,6 @@
                                 Tarif
                             </a>
                         </li>
-
-                        <li>
-                            <a href="historique.php">
-                                Historique
-                            </a>
-                        </li>
                     </ul>
                 </nav>
             </div>

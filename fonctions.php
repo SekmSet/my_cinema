@@ -1,4 +1,16 @@
 <?php
+/** GESTION DES ABONNEMENTS AJOUT / MODIFICATION / SUPPRIMER **/
+
+
+function change_abonnement($id_new_abo,$id_perso){
+    $recup_var = connect_sql();
+    $change_abonnement = "update membre set id_abo = $id_new_abo where id_fiche_perso = $id_perso;";
+    $results_modif_abo = $recup_var->exec($change_abonnement);
+
+    return $results_modif_abo === 1;
+}
+
+
 /** GESTION DES HISTORIQUES **/
 
 function historic_member($id_perso){
@@ -24,9 +36,10 @@ function get_member_by_id_perso($id_perso){
     }
 
     $recup_var = connect_sql();
-    $show_name = "select *  from membre
+    $show_name = "select *, fiche_personne.nom as nom_membre from membre
         left join fiche_personne
             on membre.id_fiche_perso = fiche_personne.id_perso
+        left join abonnement on membre.id_abo = abonnement.id_abo
         where membre.id_fiche_perso = $id_perso;";
 
     $results_name = $recup_var->query($show_name, PDO::FETCH_ASSOC);
@@ -46,7 +59,7 @@ function get_reduction(){
     return $results_reduction->fetchAll();
 }
 
-function get_abonnement(){
+function get_abonnements(){
 
     $recup_var = connect_sql();
 
@@ -71,24 +84,28 @@ function get_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp){
     if(!empty($membre_nom)){
         $where[] = "nom like '$membre_nom%'";
     }
-    if(!empty($membre_ville)){ // tu avais mi isset (c'etait toujorus set car si null c'est quand meme set
+    if(!empty($membre_ville)){ //
         $where[] = "ville like '$membre_ville%'";
     }
     if(!empty($membre_cp)){
-        $where[] = "cpostal = '$membre_cp'"; // quand = pas de % icic 2eme errzeur que tu avais pas tres grave ok like vs =
+        $where[] = "cpostal = '$membre_cp'"; // quand where qqc = qqc pas de %
     }
 
     $where_to_string = implode(' and ',$where);
 
     if(!empty($where_to_string)){
-        $show_membre = "select nom,prenom,cpostal,ville,id_perso
-                            from fiche_personne 
+        $show_membre = "select fiche_personne.nom,.fiche_personne.prenom,fiche_personne.cpostal,fiche_personne.ville,fiche_personne.id_perso, membre.id_abo as '[id_abonnement]', abonnement.nom as 'nom_abo'
+                            from membre 
+                            inner join fiche_personne on membre.id_fiche_perso  = fiche_personne.id_perso
+                            left join abonnement on membre.id_abo = abonnement.id_abo 
                             where 
                                 $where_to_string
                             limit $start ,$membre_par_page;";
     } else {
-        $show_membre = "select nom,prenom,cpostal,ville,id_perso
-                            from fiche_personne 
+        $show_membre = "select fiche_personne.nom,fiche_personne.prenom,fiche_personne.cpostal,fiche_personne.ville,fiche_personne.id_perso, membre.id_abo as 'id_abonnement', abonnement.nom as 'nom_abo'
+                            from membre 
+                            inner join fiche_personne on membre.id_fiche_perso  = fiche_personne.id_perso
+                            left join abonnement on membre.id_abo = abonnement.id_abo 
                             limit $start ,$membre_par_page;";
     }
     $results_membre = $recup_var->query($show_membre, PDO::FETCH_ASSOC);
@@ -170,7 +187,6 @@ function add_movie_history($id_membre, $id_film){
 }
 
 function print_selected($var_url,$var_opt){
-
     if ($var_url === $var_opt) {
         return "selected";
     }

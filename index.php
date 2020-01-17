@@ -4,26 +4,29 @@
 
 <div class="container col-md-12">
     <div id="you_want" class="col-md-6">
-       <span>
-           Votre recherche concerne :
-       </span>
 
         <ul>
             <li>
                 <a href="recherche_by_film.php">
-                    Un film
+                   Liste des films
                 </a>
             </li>
 
             <li>
                 <a href="recherche_by_membre.php">
-                    Un membre
+                    Liste des membres
                 </a>
             </li>
 
             <li>
                 <a href="recherche_salle.php">
-                    Une salle
+                    Liste des salles
+                </a>
+            </li>
+
+            <li>
+                <a href="tarif.php.php">
+                    Tarifs & abonnements
                 </a>
             </li>
         </ul>

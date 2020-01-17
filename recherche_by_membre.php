@@ -54,14 +54,27 @@
                             <?= "Nom : ".$value['nom'] ;?>
                             <br>
                             <?= "Prénom : ".$value['prenom'] ;?>
-
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
                         <p class="card-text"> <?= "Ville : ".$value['ville'];?> </p>
                         <p class="card-text"> <?= "Code postale : ".$value['cpostal'];?> </p>
+
+                        <?php
+//                        print_r($value);
+                        if ($value['id_abonnement'] != 0){
+                            ?>
+                            <p> <?= "Abonnement : ".$value['nom_abo'];?> </p>
+                            <?php
+                        } else { ?>
+                            <p> <?= "Abonnement : Aucun";?> </p> <?php
+
+                        } ?>
+
+
                         <br>
                         <p class = "text-hidden">
-                            <a href="historique.php?id_perso=<?= $value['id_perso'];?>"> Voir l'historique </a>
+                            <!-- on ajoute des get nom abo -->
+                            <a href="historique.php?id_perso=<?= $value['id_perso']?>"> Voir l'historique </a>
                         </p>
 
                     </div>

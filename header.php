@@ -18,66 +18,71 @@
 <body>
     <header>
         <div class="container">
-            <div class="row">
-                <h1>
-                    <a href="index.php">
-                        My_cinema
-                    </a>
-                </h1>
-
-                <nav class ="col-md-12 text-right">
-                    <ul>
-                        <li>
-                            <a href="connexion_client.php">
-                                Espace client
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="connexion_admin.php">
-                               Espace administrateur
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="new_user.php">
-                               Créer un espace
-                            </a>
-                        </li>
-                    </ul>
-
-                </nav>
+            <div class="col-md-12">
+                <div class="row">
+                    <h1>
+                        <a href="index.php">
+                            My_cinema
+                        </a>
+                    </h1>
+                </div>
             </div>
+        </div>
 
+        <div class="container">
+            <nav class ="col-md-12 text-right">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="connexion_client.php">
+                                Espace client
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="connexion_admin.php">
+                           Espace administrateur
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="new_user.php">
+                           Créer un espace
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="container">
             <div class="row">
                 <nav class ="col-md-12 text-right">
-                    <ul>
-                        <li>
-                            <a href="index.php">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php">
                                 Accueil
                             </a>
                         </li>
 
-                        <li>
-                            <a href="recherche_by_film.php">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="recherche_by_film.php">
                                 Recherche de film
                             </a>
                         </li>
 
-                        <li>
-                            <a href="recherche_by_membre.php">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="recherche_by_membre.php">
                                 Recherche de membre
                             </a>
                         </li>
 
-                        <li>
-                            <a href="recherche_salle.php">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="recherche_salle.php">
                                 Recherche de salle
                             </a>
                         </li>
 
-                        <li>
-                            <a href="tarif.php">
+                    <li class="nav-item">
+                            <a class="nav-link active" href="tarif.php">
                                 Tarif
                             </a>
                         </li>
@@ -85,4 +90,5 @@
                 </nav>
             </div>
         </div>
-    </header>
+    </div>
+</header>

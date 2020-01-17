@@ -2,27 +2,17 @@
     include ('header.php');
 ?>
 
-<div class="container col-md-12">
-    <form class="form col-md-6">
-        <div class="col-md-6">
-            <label for="user">
-                Utilisateur
-            </label>
-            <input type="text" name="user" id="user" placeholder="User_1" required>
-        </div>
+    <div class="container col-md-3">
+        <form class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Connexion Utilisateur</h1>
+            <label for="inputEmail" class="sr-only">ID Utilisateur</label>
+            <input type="text" id="id_admin" class="form-control" placeholder="User_1" required autofocus>
+            <label for="inputPassword" class="sr-only">Mot de passe</label>
+            <input type="password" id="password" class="form-control" placeholder="****" required>
 
-        <div class="col-md-6">
-            <label for="user">
-                Mot de passe
-            </label>
-            <input type="password" name="pwd" id="pwd" placeholder="*******" required>
-        </div>
-
-        <div class="col-md-6">
-            <input type="submit" value="Connexion!">
-        </div>
-    </form>
-</div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+        </form>
+    </div>
 <?php
     require ("footer.php");
 ?>

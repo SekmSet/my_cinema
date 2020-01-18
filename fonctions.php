@@ -20,8 +20,7 @@ function historic_member($id_perso){
 
     $recup_var = connect_sql();
     $show_histo = "select *  from membre
-        left join historique_membre
-            on membre.id_membre = historique_membre.id_membre
+        left join historique_membre on membre.id_membre = historique_membre.id_membre
         left join film  on historique_membre.id_film = film.id_film
         where membre.id_fiche_perso = $id_perso;";
 
@@ -46,6 +45,16 @@ function get_member_by_id_perso($id_perso){
 
     return $results_name->fetch();
 }
+
+/** FONCTIONS POUR LES AVIS **/
+
+function update_avis($id_membre,$id_film,$date,$avis){
+    $recup_var = connect_sql();
+
+    $update_table = "update historique_membre set avis = '$avis' where id_membre = $id_membre and id_film = $id_film and date = '$date' ;";
+    $recup_var->exec($update_table);
+}
+
 
 /** FONCTIONS POUR LES AFFICHAGES & LES FILTRAGES **/
 
@@ -174,14 +183,14 @@ function get_film_by_name($name) {
     return $film->fetch();
 }
 
-function add_movie_history($id_membre, $id_film){
+function add_movie_history($id_membre, $id_film, $avis_film){
     $recup_var = connect_sql();
 
     $date = 'NOW()';
 
     if(!empty($id_membre) && !empty($id_film) && is_numeric($id_membre) && is_numeric($id_film)){
 
-        $show_add = "insert into historique_membre values ($id_membre,$id_film,$date);";
+        $show_add = "insert into historique_membre values ($id_membre,$id_film,$date, '$avis_film');";
         $recup_var->exec($show_add);
     }
 }

@@ -201,6 +201,12 @@ function print_selected($var_url,$var_opt){
     }
 }
 
+function print_active($page, $current_page){
+    if ($page === $current_page) {
+        return "active";
+    }
+}
+
 function get_salle($page,$nom_salle,$num_etage,$nbr_siege){
 
     $recup_var = connect_sql();
@@ -212,10 +218,10 @@ function get_salle($page,$nom_salle,$num_etage,$nbr_siege){
     if(!empty($nom_salle)){
         $where[] = "nom_salle like '$nom_salle%'";
     }
-    if($num_etage !== 'Select numéro étage'){
+    if(!empty($num_etage)){
         $where[] = "etage_salle = '$num_etage'";
     }
-    if($nbr_siege !== 'Select nombre siège'){
+    if(!empty($nbr_siege)){
         $where[] = "nbr_siege = '$nbr_siege'";
     }
 
@@ -329,21 +335,57 @@ function pagination_membre(){
     }
 }
 
-function pagination_salle(){
+function pagination_salle($page, $nom_salle,$num_etage,$nbr_siege){
 
     $recup_var = connect_sql();
 
-    $count_membre = "select count(*) as 'nbr_salle' from salle;";
-    $results_salle = $recup_var->query($count_membre,PDO::FETCH_ASSOC);
+    $where = [];
+    if(!empty($nom_salle)){
+        $where[] = "nom_salle like '$nom_salle%'";
+    }
+    if(!empty($num_etage)){
+        $where[] = "etage_salle = '$num_etage'";
+    }
+    if(!empty($nbr_siege)){
+        $where[] = "nbr_siege = '$nbr_siege'";
+    }
+
+    $where_to_string = implode(' and ',$where);
+
+    if(!empty($where_to_string)){
+        $show_salle = "select count(*) as 'nbr_salle' from salle where $where_to_string;";
+    } else {
+        $show_salle = "select count(*) as 'nbr_salle' from salle;";
+    }
+
+    $results_salle = $recup_var->query($show_salle, PDO::FETCH_ASSOC);
     $salle_number = $results_salle->fetch()['nbr_salle'];
+
     $salle_par_page = 6;
     $nbr_page = ceil($salle_number/$salle_par_page);
 
+    echo '<nav><ul class="pagination">';
     for($i=1;$i<=$nbr_page;$i++){
-
-        echo "<a href=\"http://localhost/W@C/Projet/my_cinema/recherche_salle.php?page=$i\"> $i </a> \ ";
+        echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_salle.php?page='.$i.'">'.$i.'</a></li>';
     }
+    echo '</ul></nav>';
 }
+
+//function pagination_salle(){
+//
+//    $recup_var = connect_sql();
+//
+//    $count_membre = "select count(*) as 'nbr_salle' from salle;";
+//    $results_salle = $recup_var->query($count_membre,PDO::FETCH_ASSOC);
+//    $salle_number = $results_salle->fetch()['nbr_salle'];
+//    $salle_par_page = 6;
+//    $nbr_page = ceil($salle_number/$salle_par_page);
+//
+//    for($i=1;$i<=$nbr_page;$i++){
+//
+//        echo "<a href=\"recherche_salle.php?page=$i\"> $i </a> \ ";
+//    }
+//}
 
 function alert($message) {
     echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';

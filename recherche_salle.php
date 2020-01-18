@@ -11,7 +11,6 @@
     $return_select_etage = select_etage();
     $return_nbr_siege = select_siege();
 
-    $return_pagination = pagination_salle();
 ?>
 
 <div class="container col-md-12">
@@ -66,6 +65,12 @@
             </div>
         <?php } ?>
     </div>
+
+    <div class="row">
+        <?php pagination_salle($page, $nom_salle,$num_etage,$nbr_siege); ?>
+    </div>
+
+    <hr>
 
     <div class="container">
         <ul>

@@ -9,8 +9,6 @@
 
     $return_membre = get_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp);
 
-    $return_pagination = pagination_membre();
-
 ?>
 
 <div class="container col-md-12">
@@ -84,22 +82,11 @@
     </div>
 
     <div class="row">
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Suivant</a>
-                </li>
-            </ul>
-        </nav>
+        <?php pagination_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp); ?>
     </div>
+
+    <hr>
+
 </div>
 
 <?php

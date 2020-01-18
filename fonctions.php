@@ -317,24 +317,6 @@ function pagination_film(){
     }
 }
 
-function pagination_membre(){
-
-    $recup_var = connect_sql();
-
-    $count_membre = "select count(*) as 'type_gender' from fiche_personne;";
-
-    $membre_par_page = 16;
-
-    $results_membre = $recup_var->query($count_membre,PDO::FETCH_ASSOC);
-    $membre_number =$results_membre->fetch()['type_gender'];
-    $nbr_page = ceil($membre_number/$membre_par_page);
-
-    for($i=1;$i<=$nbr_page;$i++){
-
-        echo "<a href=\"http://localhost/W@C/Projet/my_cinema/recherche_by_membre.php?page=$i\"> $i </a> \ ";
-    }
-}
-
 function pagination_salle($page, $nom_salle,$num_etage,$nbr_siege){
 
     $recup_var = connect_sql();
@@ -371,22 +353,70 @@ function pagination_salle($page, $nom_salle,$num_etage,$nbr_siege){
     echo '</ul></nav>';
 }
 
-//function pagination_salle(){
-//
-//    $recup_var = connect_sql();
-//
-//    $count_membre = "select count(*) as 'nbr_salle' from salle;";
-//    $results_salle = $recup_var->query($count_membre,PDO::FETCH_ASSOC);
-//    $salle_number = $results_salle->fetch()['nbr_salle'];
-//    $salle_par_page = 6;
-//    $nbr_page = ceil($salle_number/$salle_par_page);
-//
-//    for($i=1;$i<=$nbr_page;$i++){
-//
-//        echo "<a href=\"recherche_salle.php?page=$i\"> $i </a> \ ";
-//    }
-//}
+function pagination_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp){
 
+    $recup_var = connect_sql();
+
+    $where = [];
+
+    if(!empty($membre_prenom)){
+        $where[] = "prenom = '$membre_prenom'";
+    }
+    if(!empty($membre_nom)){
+        $where[] = "nom like '$membre_nom%'";
+    }
+    if(!empty($membre_ville)){ //
+        $where[] = "ville like '$membre_ville%'";
+    }
+    if(!empty($membre_cp)){
+        $where[] = "cpostal = '$membre_cp'"; // quand where qqc = qqc pas de %
+    }
+
+    $where_to_string = implode(' and ',$where);
+
+    if(!empty($where_to_string)){
+        $show_membre = "select count(*) as 'type_gender'
+                            from membre 
+                            inner join fiche_personne on membre.id_fiche_perso  = fiche_personne.id_perso
+                            left join abonnement on membre.id_abo = abonnement.id_abo 
+                            where $where_to_string;";
+    } else {
+        $show_membre = "select count(*) as 'type_gender' from membre 
+                            inner join fiche_personne on membre.id_fiche_perso  = fiche_personne.id_perso
+                            left join abonnement on membre.id_abo = abonnement.id_abo;";
+    }
+
+    $results_membre = $recup_var->query($show_membre, PDO::FETCH_ASSOC);
+
+    $membre_number = $results_membre->fetch()['type_gender'];
+
+    $membre_par_page = 12;
+    $nbr_page = ceil($membre_number/$membre_par_page);
+
+    echo '<nav><ul class="pagination">';
+    for($i=1;$i<=$nbr_page;$i++){
+        echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_by_membre.php?page='.$i.'">'.$i.'</a></li>';
+    }
+    echo '</ul></nav>';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** GESTION DES MESSAGES D'ALERT **/
 function alert($message) {
     echo '<div class="alert alert-danger" role="alert">'.$message.'</div>';
 }
+

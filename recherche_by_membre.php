@@ -58,7 +58,6 @@
                         <p class="card-text"> <?= "Code postale : ".$value['cpostal'];?> </p>
 
                         <?php
-//                        print_r($value);
                         if ($value['id_abonnement'] != 0){
                             ?>
                             <p> <?= "Abonnement : ".$value['nom_abo'];?> </p>

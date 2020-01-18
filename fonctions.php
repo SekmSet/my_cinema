@@ -1,7 +1,6 @@
 <?php
 /** GESTION DES ABONNEMENTS AJOUT / MODIFICATION / SUPPRIMER **/
 
-
 function change_abonnement($id_new_abo,$id_perso){
     $recup_var = connect_sql();
     $change_abonnement = "update membre set id_abo = $id_new_abo where id_fiche_perso = $id_perso;";
@@ -9,7 +8,6 @@ function change_abonnement($id_new_abo,$id_perso){
 
     return $results_modif_abo === 1;
 }
-
 
 /** GESTION DES HISTORIQUES **/
 
@@ -88,22 +86,22 @@ function get_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membre_cp){
     $where = [];
 
     if(!empty($membre_prenom)){
-        $where[] = "prenom = '$membre_prenom'";
+        $where[] = "fiche_personne.prenom like '$membre_prenom%'";
     }
     if(!empty($membre_nom)){
-        $where[] = "nom like '$membre_nom%'";
+        $where[] = "fiche_personne.nom like '$membre_nom%'";
     }
     if(!empty($membre_ville)){ //
-        $where[] = "ville like '$membre_ville%'";
+        $where[] = "fiche_personne.ville like '$membre_ville%'";
     }
     if(!empty($membre_cp)){
-        $where[] = "cpostal = '$membre_cp'"; // quand where qqc = qqc pas de %
+        $where[] = "fiche_personne.cpostal = '$membre_cp'"; // quand where qqc = qqc pas de %
     }
 
     $where_to_string = implode(' and ',$where);
 
     if(!empty($where_to_string)){
-        $show_membre = "select fiche_personne.nom,.fiche_personne.prenom,fiche_personne.cpostal,fiche_personne.ville,fiche_personne.id_perso, membre.id_abo as '[id_abonnement]', abonnement.nom as 'nom_abo'
+        $show_membre = "select fiche_personne.nom,.fiche_personne.prenom,fiche_personne.cpostal,fiche_personne.ville,fiche_personne.id_perso, membre.id_abo as 'id_abonnement', abonnement.nom as 'nom_abo'
                             from membre 
                             inner join fiche_personne on membre.id_fiche_perso  = fiche_personne.id_perso
                             left join abonnement on membre.id_abo = abonnement.id_abo 
@@ -385,7 +383,9 @@ function pagination_salle($page, $nom_salle,$num_etage,$nbr_siege){
 
     echo '<nav><ul class="pagination flex-wrap">';
     for($i=1;$i<=$nbr_page;$i++){
-        echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_salle.php?page='.$i.'">'.$i.'</a></li>';
+        echo '<li class="page-item '. print_active((int)$page, $i).'">
+        <a class="page-link" href="recherche_salle.php?page='.$i.'&recherche_nom_salle='.$nom_salle.'&etage_salle='.$num_etage.'&nbr_siege='.$nbr_siege.'">'.$i.'</a>
+        </li>';
     }
     echo '</ul></nav>';
 }
@@ -397,16 +397,16 @@ function pagination_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membr
     $where = [];
 
     if(!empty($membre_prenom)){
-        $where[] = "prenom = '$membre_prenom'";
+        $where[] = "fiche_personne.prenom = '$membre_prenom'";
     }
     if(!empty($membre_nom)){
-        $where[] = "nom like '$membre_nom%'";
+        $where[] = "fiche_personne.nom like '$membre_nom%'";
     }
     if(!empty($membre_ville)){ //
-        $where[] = "ville like '$membre_ville%'";
+        $where[] = "fiche_personne.ville like '$membre_ville%'";
     }
     if(!empty($membre_cp)){
-        $where[] = "cpostal = '$membre_cp'"; // quand where qqc = qqc pas de %
+        $where[] = "fiche_personne.cpostal = '$membre_cp'"; // quand where qqc = qqc pas de %
     }
 
     $where_to_string = implode(' and ',$where);
@@ -422,35 +422,18 @@ function pagination_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membr
                             inner join fiche_personne on membre.id_fiche_perso  = fiche_personne.id_perso
                             left join abonnement on membre.id_abo = abonnement.id_abo;";
     }
-
     $results_membre = $recup_var->query($show_membre, PDO::FETCH_ASSOC);
 
     $membre_number = $results_membre->fetch()['type_gender'];
-
     $membre_par_page = 12;
     $nbr_page = ceil($membre_number/$membre_par_page);
 
     echo '<nav><ul class="pagination flex-wrap">';
     for($i=1;$i<=$nbr_page;$i++){
-        echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_by_membre.php?page='.$i.'">'.$i.'</a></li>';
+        echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_by_membre.php?page='.$i.'&recherche_par_prenom='.$membre_prenom.'&recherche_par_nom='.$membre_nom.'&recherche_par_ville='.$membre_ville.'&recherche_par_cp='.$membre_cp.'">'.$i.'</a></li>';
     }
     echo '</ul></nav>';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /** GESTION DES MESSAGES D'ALERT **/
 function alert($message) {

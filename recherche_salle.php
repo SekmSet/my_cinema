@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="select_etage">Numéro étage</label>
             <select name="etage_salle" class="form-control" id="select_etage">
-                <option>Select numéro étage</option>
+                <option value="">Select numéro étage</option>
                 <?php foreach ($return_select_etage as $value){ ?>
                     <option ><?= $value['etage_salle'];?></option>
                 <?php } ?>
@@ -35,7 +35,7 @@
         <div class="form-group">
             <label for="nbr_siege">Nombre de siège</label>
             <select name="nbr_siege" class="form-control" id="select_etage">
-                <option>Select nombre siège</option>
+                <option value="">Select nombre siège</option>
                 <?php foreach ($return_nbr_siege as $value){ ?>
                     <option ><?= $value['nbr_siege'];?></option>
                 <?php } ?>

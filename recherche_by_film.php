@@ -19,8 +19,6 @@
     $return_select_debut_affiche = select_film_debut_affiche();
     $return_select_annee_prod =  select_film_annee_prod();
 
-    $return_pagination = pagination_film();
-
 ?>
 
 <div class="container col-md-12">
@@ -110,20 +108,28 @@
                     <p class="card-text"> <?= $value['resum']; ?> </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Avis</button>
-                            <br>
 
-                            genre <?= $value['nom_genre']; ?><br>
-                            distrib <?= $value['nom_distrib']; ?>
+                            <ul>
+                                <li> Genre :  <?= $value['nom_genre']; ?></li>
+                                <li> Distributeur :  <?= $value['nom_distrib']; ?></li>
+                            </ul>
+
                         </div>
-<!--                        <small class="text-muted"> --><?//= "Année de production : " . $value['annee_prod']; ?><!--</small>-->
                     </div>
                 </div>
             </div>
         </div>
         <?php } ?>
     </div>
+
+    <div class="row">
+        <?php pagination_films($page, $recherche_titre, $genre_selected, $distrib_select, $annee_affiche_deb_select, $annee_affiche_fin_select, $annee_prod_select); ?>
+    </div>
+
+    <hr>
 </div>
+
+
 
 <?php
  require ("footer.php");

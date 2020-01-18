@@ -301,20 +301,57 @@ function select_siege(){
 
 /** FONCTIONS POUR LA PAGINATION **/
 
-function pagination_film(){
+function pagination_films($page, $recherche_titre, $genre_selected, $distrib_select, $annee_affiche_deb_select, $annee_affiche_fin_select, $annee_prod_select){
 
     $recup_var = connect_sql();
 
-    $count_film = "select count(*) as 'nbr_film' from film;";
+    $where = [];
+    if(!empty($recherche_titre)) {
+        $where[] = "titre like '$recherche_titre%'";
+    }
+    if(!empty($annee_affiche_deb_select)) {
+        $where[] =  "year(date_debut_affiche) = '$annee_affiche_deb_select'";
+    }
+    if(!empty($annee_affiche_fin_select)) {
+        $where[] =  "year(date_fin_affiche) = '$annee_affiche_fin_select'";
+    }
+    if(!empty($annee_prod_select)) {
+        $where[] = "annee_prod = '$annee_prod_select'";
+    }
 
-    $results_film = $recup_var->query($count_film, PDO::FETCH_ASSOC);
-    $nbr_film=$results_film->fetch()['nbr_film'];
+    if(!empty($distrib_select)){
+        $where[] = "distrib.nom = '$distrib_select'";
+    }
+
+    if(!empty($genre_selected)){
+        $where[] = "genre.nom = '$genre_selected'";
+    }
+
+    $where_string = implode(' and ', $where); //  titre like '$recherche_titre%' and year(date_fin_affiche) = '$annee_affiche_fin_select'
+
+    if(!empty($where_string)) {
+        $show_film = "select  count(*) as 'nbr_film' from film
+                        left join genre on film.id_genre = genre.id_genre
+                        left join distrib on film.id_distrib = distrib.id_distrib
+                        where $where_string";
+
+    } else {
+        $show_film = "select  count(*) as 'nbr_film' from film
+                        left join genre on film.id_genre = genre.id_genre
+                        left join distrib on film.id_distrib = distrib.id_distrib;";
+    }
+
+    $results_film = $recup_var->query($show_film, PDO::FETCH_ASSOC);
+
+    $nbr_film =  $results_film->fetch()['nbr_film'];
     $film_par_page = 16;
     $nbr_page = $nbr_film/$film_par_page;
 
+    echo '<nav><ul class="pagination flex-wrap">';
     for($i=1;$i<=$nbr_page;$i++){
-        echo "<a href=\"http://localhost/W@C/Projet/my_cinema/recherche_by_film.php?page=$i\"> $i </a> \ ";
+        echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_by_film.php?page='.$i.'">'.$i.'</a></li>';
     }
+    echo '</ul></nav>';
 }
 
 function pagination_salle($page, $nom_salle,$num_etage,$nbr_siege){
@@ -346,7 +383,7 @@ function pagination_salle($page, $nom_salle,$num_etage,$nbr_siege){
     $salle_par_page = 6;
     $nbr_page = ceil($salle_number/$salle_par_page);
 
-    echo '<nav><ul class="pagination">';
+    echo '<nav><ul class="pagination flex-wrap">';
     for($i=1;$i<=$nbr_page;$i++){
         echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_salle.php?page='.$i.'">'.$i.'</a></li>';
     }
@@ -393,7 +430,7 @@ function pagination_membre($page,$membre_nom,$membre_prenom,$membre_ville,$membr
     $membre_par_page = 12;
     $nbr_page = ceil($membre_number/$membre_par_page);
 
-    echo '<nav><ul class="pagination">';
+    echo '<nav><ul class="pagination flex-wrap">';
     for($i=1;$i<=$nbr_page;$i++){
         echo '<li class="page-item '. print_active((int)$page, $i).'"><a class="page-link" href="recherche_by_membre.php?page='.$i.'">'.$i.'</a></li>';
     }

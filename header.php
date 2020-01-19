@@ -1,6 +1,14 @@
 <?php
+    session_start();
+
     include ('connexion_sql.php');
     include ('fonctions.php');
+
+    if(isset($_GET['deconnexion'])){
+        session_destroy();
+        session_start();
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +64,16 @@
                            Créer un espace
                         </a>
                     </li>
+                    <?php if (isset($_SESSION['client'])){ ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php?deconnexion=1">
+                                Deconnexion
+                            </a>
+                        </li>
+                    <?php } ?>
+
+
+
                 </ul>
             </nav>
         </div>
@@ -105,9 +123,18 @@
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </nav>
             </div>
         </div>
+
+        <div>
+            <?php
+                if (isset($_SESSION['client'])) { ?>
+                    <p> Bonjour <?=$_SESSION['client']['prenom'];?> ! Tu es connecté.e :)</p>
+            <?php
+                }
+            ?>
+        </div>
+
     </header>

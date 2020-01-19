@@ -1,4 +1,23 @@
 <?php
+/** GESTION DE LA CONNEXION & DECONNEXION CLIENT ET ADMIN **/
+
+function connexion_client($verif_email,$verif_mdp){
+
+    $recup_var = connect_sql();
+
+    if (empty($verif_email) || empty($verif_mdp)){
+        return FALSE;
+    }
+
+   $verif_info =  "select * from fiche_personne 
+                            inner join membre on fiche_personne.id_perso = membre.id_fiche_perso
+                            where email = '$verif_email' and mdp = '$verif_mdp';";
+
+   $return_verif = $recup_var->query($verif_info,PDO::FETCH_ASSOC);
+
+   return $return_verif->fetch();
+}
+
 /** GESTION DES ABONNEMENTS AJOUT / MODIFICATION / SUPPRIMER **/
 
 function change_abonnement($id_new_abo,$id_perso){

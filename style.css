@@ -1,4 +1,13 @@
-/*body{*/
+body{
 /*    !*background-color: rosybrown;*!*/
-/*    background-image: url(".rss/img/img1.jpg");*/
-/*}*/
+    background-image: url("rss/img/img2.jpg");
+}
+
+.container{
+    background-color: rgba(231,229,229,0.8);
+    border-radius: 9px;
+}
+
+.container + .container {
+    margin-top: 30px;
+}

@@ -11,7 +11,7 @@
 
 ?>
 
-<div class="container col-md-12">
+<div class="container px-3 py-3">
     <form class="form col-md-6" method="get">
         <div class="col-md-6">
             <label for="recherche">
@@ -42,7 +42,7 @@
 </div>
 
 
-<div class="container">
+<div class="container px-3 py-3">
     <div class="row">
         <?php foreach ($return_membre as $value){ ?>
             <div class="col-md-4">

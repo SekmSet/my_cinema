@@ -2,7 +2,7 @@
     include ('header.php');
 ?>
 
-<div class="container col-md-3">
+<div class="container px-3 py-3">
     <form class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Connexion Admin</h1>
         <label for="inputEmail" class="sr-only">ID Admin</label>

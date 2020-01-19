@@ -1,4 +1,4 @@
-<footer class="container py-5">
+<footer class="container px-3 py-3">
     <div class="row">
         <div class="col-6 col-md">
             <h5>Espace de connexion</h5>

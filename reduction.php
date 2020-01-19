@@ -4,7 +4,7 @@
     $return_reduction = get_reduction();
 ?>
 
-<div class="container col-md-12">
+<div class="container px-3 py-3">
     <form class="form col-md-6">
 
         <div class="col-md-6">
@@ -20,7 +20,7 @@
     </form>
 </div>
 
-<div class="container">
+<div class="container px-3 py-3">
     <div class="row">
         <?php foreach ($return_reduction as $value){ ?>
             <div class="col-md-4">

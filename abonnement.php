@@ -4,7 +4,7 @@
     $return_abonnement = get_abonnements();
 ?>
 
-<div class="container col-md-12">
+<div class="container px-3 py-3">
     <form class="form col-md-6">
 
         <div class="col-md-6">
@@ -20,7 +20,7 @@
     </form>
 </div>
 
-<div class="container">
+<div class="container px-3 py-3">
     <?php foreach ($return_abonnement as $value){ ?>
     <div class="card-deck mb-3 text-center">
         <div class="card mb-3 shadow-sm">
@@ -46,7 +46,7 @@
 <br>
 
 
-<div class="container">
+<div class="container px-3 py-3">
     <?php
     require("footer.php");
     ?>

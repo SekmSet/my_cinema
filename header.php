@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="container">
+    <header class="container px-3 py-3">
+        <div>
             <div class="col-md-12">
                 <div class="row">
                     <h1>
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div >
             <nav class ="col-md-12 text-right">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
@@ -53,7 +53,7 @@
 
             </nav>
         </div>
-        <div class="container">
+        <div >
             <div class="row">
                 <nav class ="col-md-12 text-right">
                     <ul class="nav justify-content-center">

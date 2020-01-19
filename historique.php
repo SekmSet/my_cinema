@@ -45,7 +45,7 @@
 ?>
 
 
-<div class="container col-md-12">
+<div class="container px-3 py-3">
     <form class="form col-md-11" method="get">
         <div class="col-md-5">
             <div class="form-group">
@@ -63,7 +63,7 @@
         </div>
     </form>
 </div>
-<div class="container">
+<div class="container px-3 py-3">
     <div class="col-md-6">
         <?php
             if(empty($id_perso)){
@@ -109,7 +109,7 @@
 
 
 
-<div class="container">
+<div class="container px-3 py-3">
     <div class = "col-md-12">
         <div class="col-md-6">
             <?php

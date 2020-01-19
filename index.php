@@ -2,7 +2,7 @@
     require ("header.php");
 ?>
 
-<div class="container col-md-12">
+<div class="container px-3 py-3">
     <div id="you_want" class="col-md-6">
 
         <ul>

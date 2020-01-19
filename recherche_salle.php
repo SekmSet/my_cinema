@@ -42,7 +42,7 @@
             </select>
         </div>
         <div class="col-md-6">
-            <input type="submit" value="Rechercher">
+            <input class = "button" type="submit" value="Rechercher">
         </div>
     </form>
 </div>
@@ -53,12 +53,12 @@
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title nom_salle">
                             <?= $value['nom_salle'];?>
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
-                        <p class="card-text"> <?= "Etage salle : ".$value['etage_salle']; ?> </p>
-                        <p class="card-text"> <?= "Nombre de siège : ".$value['nbr_siege']; ?> </p>
+                        <p class="card-text salle_etage"> <?= "Etage salle : ".$value['etage_salle']; ?> </p>
+                        <p class="card-text salle_siege"> <?= "Nombre de siège : ".$value['nbr_siege']; ?> </p>
 
                     </div>
                 </div>
@@ -70,9 +70,7 @@
         <?php pagination_salle($page, $nom_salle,$num_etage,$nbr_siege); ?>
     </div>
 
-    <hr>
-
-    <div class="container px-3 py-3">
+    <div >
         <ul>
             <li><a href="programme.php">
                     Voir les programmes

@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rye&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -20,7 +28,7 @@
         <div>
             <div class="col-md-12">
                 <div class="row">
-                    <h1>
+                    <h1 id="titre_web">
                         <a href="index.php">
                             My_cinema
                         </a>
@@ -81,11 +89,25 @@
                             </a>
                         </li>
 
-                    <li class="nav-item">
-                            <a class="nav-link active" href="tarif.php">
+                        <li class="nav-item" id="dropdown">
+                            <a class="nav-link active" href="#">
                                 Tarif
                             </a>
+                            <ul>
+                                <li>
+                                    <a class="nav-link active" href="abonnement.php">
+                                        Abonnement
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="nav-link active" href="reduction.php">
+                                        Reduction
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+
                     </ul>
                 </nav>
             </div>

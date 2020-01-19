@@ -72,7 +72,7 @@
                 echo "ERROR - Il faut un membre valide";
             } else {
         ?>
-              <p>
+              <p id="nom_prenom">
                    <b> Nom - Prénom : <?= $return_member['nom_membre'] . " - " . $return_member['prenom'];?> </b>
                   <br>
               </p>
@@ -83,11 +83,9 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <br>
-                        <?= 'Titre du film : ' . $value['titre'];?>
-                        <br>
-                        <?= 'Vu le : ' . $value['date'];?>
-                        <br>
-                        <?= 'Votre avis : ' . $value['avis'];?>
+                        <p id="titre_film"> <?= 'Titre du film : ' . $value['titre'];?></p>
+                        <p id="date_vu"><?= 'Vu le : ' . $value['date'];?></p>
+                        <p id="avis_film"> <?= 'Votre avis : ' . $value['avis'];?></p>
 
                         <form>
                             <textarea name="avis" id="avis_my_movie" cols="22" rows="2" placeholder="Ajouter un avis"></textarea>
@@ -95,7 +93,7 @@
                             <input type="hidden" name="date" value="<?= $value['date'] ?>">
                             <input type="hidden" name="id_film" value="<?= $value['id_film'] ?>">
 
-                            <input type="submit" name="type" value="Donner mon avis">
+                            <input class="button" type="submit" name="type" value="Donner mon avis">
                         </form>
                     </li>
                 </ul>

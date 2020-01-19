@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-md-6">
-            <input type="submit" name="submit" value="Rechercher">
+            <input class = "button" type="submit" name="submit" value="Rechercher">
         </div>
     </form>
 </div>
@@ -98,21 +98,20 @@
         <div class="col-md-3">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <?=
-                            $value['titre'] . " - ".$value['duree_min']."min";
-                        ?>
+                    <h5 class="card-title nom_film">
+                        <?= $value['titre'] ;?>
+                        <br>
+                        <?=$value['duree_min']."min"; ?>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted"></h6>
 
-                    <p class="card-text"> <?= $value['resum']; ?> </p>
+                    <p class="card-text resum_film"> <?= $value['resum']; ?> </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-
-                            <ul>
-                                <li> Genre :  <?= $value['nom_genre']; ?></li>
-                                <li> Distributeur :  <?= $value['nom_distrib']; ?></li>
-                            </ul>
+                            <ol>
+                                <li id="genre_film"> Genre :  <?= $value['nom_genre']; ?></li>
+                                <li id="distrib_film"> Distributeur :  <?= $value['nom_distrib']; ?></li>
+                            </ol>
 
                         </div>
                     </div>

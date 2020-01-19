@@ -36,7 +36,7 @@
         </div>
 
         <div class="col-md-6">
-            <input type="submit" value="Rechercher">
+            <input class = "button" type="submit" value="Rechercher">
         </div>
     </form>
 </div>
@@ -48,29 +48,28 @@
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title membre_nom">
                             <?= "Nom : ".$value['nom'] ;?>
                             <br>
                             <?= "Prénom : ".$value['prenom'] ;?>
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
-                        <p class="card-text"> <?= "Ville : ".$value['ville'];?> </p>
-                        <p class="card-text"> <?= "Code postale : ".$value['cpostal'];?> </p>
+                        <p class="card-text membre_vile"> <?= "Ville : ".$value['ville'];?> </p>
+                        <p class="card-text membre_cp"> <?= "Code postale : ".$value['cpostal'];?> </p>
 
                         <?php
                         if ($value['id_abonnement'] != 0){
                             ?>
-                            <p> <?= "Abonnement : ".$value['nom_abo'];?> </p>
+                            <p class="membre_abo"> <?= "Abonnement : ".$value['nom_abo'];?> </p>
                             <?php
                         } else { ?>
-                            <p> <?= "Abonnement : Aucun";?> </p> <?php
+                            <p class="membre_abo"> <?= "Abonnement : Aucun";?> </p> <?php
 
                         } ?>
 
 
                         <br>
-                        <p class = "text-hidden">
-                            <!-- on ajoute des get nom abo -->
+                        <p class = "text-hidden historique">
                             <a href="historique.php?id_perso=<?= $value['id_perso']?>"> Voir l'historique </a>
                         </p>
 

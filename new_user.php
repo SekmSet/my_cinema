@@ -2,84 +2,91 @@
     include ('header.php');
 ?>
 
-<div>
-    <form action="">
+<div class="container px-3 py-3">
+    <form>
 
-        <div class="col-md-12">
-            <label>Je suis :
-                <input type="radio" name="is_user" value="client"> Client
-                <input type="radio" name="is_admin" value="admin"> Administrateur
-            </label>
+        <div class="form-group">
+            <label for="type">Je suis :</label>
+            <input type="radio" id="type" name="is_user" value="client"> Client
+            <input type="radio" name="is_admin" value="admin"> Administrateur
         </div>
 
         <div>
-            <label for="prenom">Prénom
-                <input type="text" name="prenom" placeholder="Kaname" required>
-            </label>
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input class="form-control" type="text" id="prenom" name="prenom" placeholder="Kaname" required>
+            </div>
 
-            <label for="nom">Nom
-                <input type="text" name="nom" placeholder="Kuran" required>
-            </label>
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <input class="form-control" type="text" id="nom" name="nom" placeholder="Kuran" required>
+            </div>
 
-            <label for="nom">Nom
-                <input type="text" name="nom" placeholder="Kuran" required>
-            </label>
-
-            <label for="sexe">Sexe
-                <input type="radio" name="is_female" value="femme"> Femme
+            <div class="form-group">
+                <label for="sexe">Sexe</label>
+                <input type="radio" id="sexe" name="is_female" value="femme"> Femme
                 <input type="radio" name="is_male" value="homme"> Homme
-            </label>
+            </div>
 
-            <label for="naissance">Date de naissance
-                <input type="date" name="naissance" placeholder="" required>
-            </label>
+            <div class="form-group">
+                <label for="naissance">Date de naissance</label>
+                <input class="form-control" type="date" id="naissance" name="naissance" required>
+            </div>
 
-            <label for="mail">Mail
-                <input type="email" name="mail" placeholder="kaname.kuran@orange.fr" required>
-            </label>
+            <div class="form-group">
+                <label for="mail">Mail</label>
+                <input class="form-control" type="email" id="mail" name="mail" placeholder="kaname.kuran@orange.fr" required>
+            </div>
 
-            <label for="tel">Téléphone
-                <input type="tel" name="tel" placeholder="0610101010" required>
-            </label>
+            <div class="form-group">
+                <label for="tel">Téléphone</label>
+                <input class="form-control" type="tel" id="tel" name="tel" placeholder="0610101010" required>
+            </div>
 
-            <label for="ville">Ville
-                <input type="text" name="ville" placeholder="Lyon" required>
-            </label>
+            <div class="form-group">
+                <label for="ville">Ville</label>
+                <input class="form-control" type="text" id="ville" name="ville" placeholder="Lyon" required>
+            </div>
 
-            <label for="cp">Mail
-                <input type="number" name="cp" placeholder="69003" required>
-            </label>
+            <div class="form-group">
+                <label for="cp">Mail</label>
+                <input class="form-control" type="number" id="cp" name="cp" placeholder="69003" required>
+            </div>
         </div>
 
         <div>
-            <label for="abonnement">Abonnement
-                <input type="radio" name="is_female" value="oui" checked> Oui
+            <div class="form-group">
+                <label for="abonnement">Abonnement</label>
+                <input type="radio" id="abonnement" name="is_female" value="oui" checked> Oui
                 <input type="radio" name="is_male" value="non"> Non
-            </label>
+            </div>
 
-            <label for="choix_abo"> Choix de votre abonnement </label>
-                <select name="abonnement" id="choix_abo">
+            <div class="form-group">
+                <label for="choix_abo"> Choix de votre abonnement </label>
+                <select class="form-control" name="abonnement" id="choix_abo">
                     <option value="element_choose">Selection d'un élément</option>
                     <option value="vip">VIP</option>
                     <option value="gold">Gold</option>
                     <option value="classic">Classic</option>
                     <option value="pass_day">pass day</option>
                 </select>
+            </div>
         </div>
 
         <div>
-            <label for="user_name">Nom d'utilisteur
-                <input type="text" name="user_name" placeholder="User_1" required>
-            </label>
+            <div class="form-group">
+                <label for="user_name">Nom d'utilisteur</label>
+                <input type="text" id="user_name" name="user_name" placeholder="User_1" required>
+            </div>
 
-            <label for="pwd_account">Mot de passe
-                <input type="password" name="pwd_account" placeholder="*****" required>
-            </label>
-
+            <div class="form-group">
+                <label for="pwd_account">Mot de passe</label>
+                <input type="password" id="pwd_account" name="pwd_account" placeholder="*****" required>
+            </div>
         </div>
 
         <div class="col-md-6">
-            <input type="submit" value="Inscription">
+            <input class = "button" type="submit" value="Inscription">
         </div>
     </form>
 </div>

@@ -29,7 +29,6 @@
                         <h5 class="card-title">
                             <?= "Réduction : ".$value['nom'];?>
                         </h5>
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
                         <p class="card-text"> <?= "Description : ".$value['pourcentage_reduc'] ."%"; ?> </p>
                         <?php
                         if ($value['nom'] === "fete de la musique"){

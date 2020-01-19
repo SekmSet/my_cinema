@@ -2,9 +2,8 @@
     include ('connexion_sql.php');
     include ('fonctions.php');
 ?>
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -37,7 +36,7 @@
             </div>
         </div>
 
-        <div >
+        <div>
             <nav class ="col-md-12 text-right">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
@@ -58,10 +57,9 @@
                         </a>
                     </li>
                 </ul>
-
             </nav>
         </div>
-        <div >
+        <div>
             <div class="row">
                 <nav class ="col-md-12 text-right">
                     <ul class="nav justify-content-center">
@@ -112,5 +110,4 @@
                 </nav>
             </div>
         </div>
-    </div>
-</header>
+    </header>

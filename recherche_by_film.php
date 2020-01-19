@@ -35,7 +35,7 @@
             <select name="gender_type" class="form-control" id="select_gender">
                 <option value="">Select genre</option>
                 <?php foreach ($return_select_genre as $value){ ?>
-                    <option <?= print_selected($genre_selected,$value['nom']);?> ><?= $value['nom'];?></option>
+                    <option <?= print_selected($genre_selected,$value['nom']);?>><?= $value['nom'];?></option>
                 <?php } ?>
             </select>
         </div>
@@ -103,14 +103,13 @@
                         <br>
                         <?=$value['duree_min']."min"; ?>
                     </h5>
-                    <h6 class="card-subtitle mb-2 text-muted"></h6>
 
                     <p class="card-text resum_film"> <?= $value['resum']; ?> </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <ol>
-                                <li id="genre_film"> Genre :  <?= $value['nom_genre']; ?></li>
-                                <li id="distrib_film"> Distributeur :  <?= $value['nom_distrib']; ?></li>
+                                <li class="genre_film"> Genre :  <?= $value['nom_genre']; ?></li>
+                                <li class="distrib_film"> Distributeur :  <?= $value['nom_distrib']; ?></li>
                             </ol>
 
                         </div>

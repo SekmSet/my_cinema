@@ -50,7 +50,7 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label for="year_first_affiche">Titre du film que vous souhaitez ajouter à votre historique : </label>
-                <input type="text" name="add_film" id="recherche" placeholder="A Night at the Roxbury" required>
+                <input type="text" name="add_film" id="year_first_affiche" placeholder="A Night at the Roxbury" required>
                 <input type="hidden" name="id_perso" value="<?= $id_perso?>">
             </div>
             <div>
@@ -72,7 +72,7 @@
                 echo "ERROR - Il faut un membre valide";
             } else {
         ?>
-              <p id="nom_prenom">
+              <p class="nom_prenom">
                    <b> Nom - Prénom : <?= $return_member['nom_membre'] . " - " . $return_member['prenom'];?> </b>
                   <br>
               </p>
@@ -83,12 +83,12 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <br>
-                        <p id="titre_film"> <?= 'Titre du film : ' . $value['titre'];?></p>
-                        <p id="date_vu"><?= 'Vu le : ' . $value['date'];?></p>
-                        <p id="avis_film"> <?= 'Votre avis : ' . $value['avis'];?></p>
+                        <p class="titre_film"> <?= 'Titre du film : ' . $value['titre'];?></p>
+                        <p class="date_vu"><?= 'Vu le : ' . $value['date'];?></p>
+                        <p class="avis_film"> <?= 'Votre avis : ' . $value['avis'];?></p>
 
                         <form>
-                            <textarea name="avis" id="avis_my_movie" cols="22" rows="2" placeholder="Ajouter un avis"></textarea>
+                            <textarea name="avis" class="avis_my_movie" cols="22" rows="2" placeholder="Ajouter un avis"></textarea>
                             <input type="hidden" name="id_perso" value="<?= $id_perso?>">
                             <input type="hidden" name="date" value="<?= $value['date'] ?>">
                             <input type="hidden" name="id_film" value="<?= $value['id_film'] ?>">
@@ -113,7 +113,7 @@
             <?php
             if (!empty($id_abo)){
                 ?>
-                <form action="">
+                <form>
                     <label for="abonnement">Abonnement: </label>
                     <select id="abonnement" name="abonnement">
                         <?php foreach ($return_abonnements as $value) { ?>
@@ -125,7 +125,7 @@
                     <input type="submit" value="Changer mon abonnement">
                 </form>
 
-                <form action="">
+                <form>
                     <input type="hidden" name="type" value="delete_abo">
                     <input type="hidden" name="id_perso" value="<?= $id_perso ?>">
                     <input type="submit" name="delete" value="Supprimer mon abonnement">
@@ -134,7 +134,7 @@
                 <?php
             } else { ?>
                 <p> <?= "Abonnement : Aucun";?> </p>
-                <form action="">
+                <form>
                     <label for="abonnement">Abonnement: </label>
                     <select id="abonnement" name="abonnement">
                         <option value="0">Choix de l'abonnement</option>
@@ -156,7 +156,6 @@
             </ul>
         </div>
     </div>
-</div>
 </div>
 
 

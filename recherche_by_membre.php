@@ -14,25 +14,25 @@
 <div class="container px-3 py-3">
     <form class="form col-md-6" method="get">
         <div class="col-md-6">
-            <label for="recherche">
+            <label for="recherche_par_prenom">
                 Recherche par prénom
             </label>
-            <input type="text" name="recherche_par_prenom" id="recherche" placeholder="armand">
+            <input type="text" id="recherche_par_prenom" name="recherche_par_prenom" placeholder="armand">
 
-            <label for="recherche">
+            <label for="recherche_par_nom">
                 Recherche par nom
             </label>
-            <input type="text" name="recherche_par_nom" id="recherche" placeholder="de-ferrieres-de-sauveboeuf">
+            <input type="text" id="recherche_par_nom" name="recherche_par_nom" placeholder="de-ferrieres-de-sauveboeuf">
 
-            <label for="recherche">
+            <label for="recherche_par_ville">
                 Recherche par ville
             </label>
-            <input type="text" name="recherche_par_ville" id="recherche" placeholder="Lyon">
+            <input type="text" id="recherche_par_ville" name="recherche_par_ville" placeholder="Lyon">
 
-            <label for="recherche">
+            <label for="recherche_par_cp">
                 Recherche par code postale
             </label>
-            <input type="text" name="recherche_par_cp" id="recherche" placeholder="69003">
+            <input type="text" id="recherche_par_cp" name="recherche_par_cp" placeholder="69003">
         </div>
 
         <div class="col-md-6">
@@ -53,7 +53,6 @@
                             <br>
                             <?= "Prénom : ".$value['prenom'] ;?>
                         </h5>
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
                         <p class="card-text membre_vile"> <?= "Ville : ".$value['ville'];?> </p>
                         <p class="card-text membre_cp"> <?= "Code postale : ".$value['cpostal'];?> </p>
 

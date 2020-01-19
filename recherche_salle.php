@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="nbr_siege">Nombre de siège</label>
-            <select name="nbr_siege" class="form-control" id="select_etage">
+            <select name="nbr_siege" class="form-control" id="nbr_siege">
                 <option value="">Select nombre siège</option>
                 <?php foreach ($return_nbr_siege as $value){ ?>
                     <option ><?= $value['nbr_siege'];?></option>
@@ -56,7 +56,6 @@
                         <h5 class="card-title nom_salle">
                             <?= $value['nom_salle'];?>
                         </h5>
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
                         <p class="card-text salle_etage"> <?= "Etage salle : ".$value['etage_salle']; ?> </p>
                         <p class="card-text salle_siege"> <?= "Nombre de siège : ".$value['nbr_siege']; ?> </p>
 

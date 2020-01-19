@@ -50,20 +50,20 @@ label{
     font-family: 'Rye', cursive;
 }
 
-.nom_film,.membre_nom,.nom_salle,#nom_prenom{
+.nom_film,.membre_nom,.nom_salle,.nom_prenom{
     font-family: 'Cinzel Decorative', cursive;
     font-size: 20px;
 }
 
-.resum_film,.membre_vile,.membre_cp,.salle_siege,.salle_etage,#titre_film,#date_vu{
+.resum_film,.membre_vile,.membre_cp,.salle_siege,.salle_etage,.titre_film,.date_vu{
     padding: 15px;
     font-family: 'Special Elite', cursive;
     color: #757575;
 }
-#titre_film,#date_vu{
+.titre_film,.date_vu{
     font-weight: bold;
 }
-#genre_film , #distrib_film,.membre_abo,#avis_film{
+.genre_film , .distrib_film,.membre_abo,.avis_film{
     font-family: 'Special Elite', cursive;
     font-size: 15px;
     list-style: none;

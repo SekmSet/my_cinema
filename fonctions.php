@@ -262,7 +262,7 @@ function select_genre(){
 
 function select_film_debut_affiche(){
     $recup_var = connect_sql();
-    $select_debut_affiche = 'select year(date_debut_affiche) from film group by year(date_debut_affiche);';
+    $select_debut_affiche = 'select year(date_debut_affiche) from film where date_debut_affiche is not null group by year(date_debut_affiche);';
     $results_debut = $recup_var->query($select_debut_affiche, PDO::FETCH_ASSOC);
 
     return $results_debut->fetchAll();
@@ -270,7 +270,7 @@ function select_film_debut_affiche(){
 
 function select_film_fin_affiche(){
     $recup_var = connect_sql();
-    $select_fin_affiche = 'select year(date_fin_affiche) from film group by  year(date_fin_affiche);';
+    $select_fin_affiche = 'select year(date_fin_affiche) from film where date_fin_affiche is not null group by  year(date_fin_affiche);';
     $results_fin = $recup_var->query($select_fin_affiche, PDO::FETCH_ASSOC);
 
     return $results_fin->fetchAll();
@@ -278,7 +278,7 @@ function select_film_fin_affiche(){
 
 function select_film_annee_prod(){
     $recup_var = connect_sql();
-    $select_annee_prod = 'select annee_prod from film group by annee_prod;';
+    $select_annee_prod = 'select annee_prod from film where annee_prod is not null group by annee_prod;';
     $results_prod = $recup_var->query($select_annee_prod, PDO::FETCH_ASSOC);
     return $results_prod->fetchAll();
 }

@@ -1,8 +1,10 @@
-# ajoute la colonne avis
+#
+Add notice column
 alter table historique_membre add avis text null;
 
-# Ajout de la colonne MDP pour la table fiche_personne
+#
+Add of the MDP column for the fiche_personne table
 alter table fiche_personne add mdp varchar(255) null;
 
-# generation du MDP pour tous
+# Generate a unique password
 update fiche_personne set mdp = 'mdp1' ;

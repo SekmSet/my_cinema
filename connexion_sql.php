@@ -3,8 +3,8 @@
 function connect_sql()
 {
 
-    $user = 'root';
-    $pwd = 'Obrigada';
+    $user = 'my_username';
+    $pwd = 'my_pwd';
     $dsn = 'mysql:dbname=cinema;host=localhost';
 
     try {

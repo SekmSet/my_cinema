@@ -33,12 +33,12 @@
 
 ![my_cinema](.github/preview/home.png "Home page preview")
 ![my_cinema](.github/preview/login_user.png "User login page preview")
-![my_cinema](.github/preview/admin_login.png "User admin page preview")
+![my_cinema](.github/preview/login_admin.png "User admin page preview")
 ![my_cinema](.github/preview/register.png "Register page preview")
 ![my_cinema](.github/preview/movies.png "Search movies page preview")
 ![my_cinema](.github/preview/reductions.png " Reductions page preview")
 ![my_cinema](.github/preview/abonnements.png " Abonnement page preview")
-![my_cinema](.github/preview/salles.png " Salles page preview")
+![my_cinema](.github/preview/salle.png " Salles page preview")
 ![my_cinema](.github/preview/members.png " Members page preview")
 ![my_cinema](.github/preview/historique.png " Historique page preview")
 
